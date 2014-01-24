@@ -15,6 +15,11 @@ public class Level : MonoBehaviour {
     public int prefabsToPreLoad = 10;                                       //  How many of each prefab type to load in.
     public float offsetX = 5.0f;                                            //  Offset between the pieces on the x-axis.
 
+    //Store the position of the last object loaded for reference.
+    private Vector3 lastObjectLoadedAt = Vector3.zero;
+
+
+    
 
     void Awake()
     {
@@ -56,12 +61,48 @@ public class Level : MonoBehaviour {
 
             unloadedObjects.Remove(obj);
             loadedObjects.Add(obj);
+
+            if (i == objectsLoadedAtStart - 1)
+            {
+                lastObjectLoadedAt = obj.transform.position;
+            }
         }
 	}
+
+    void AddPiece()
+    {
+        int random = Random.Range(0, unloadedObjects.Count);
+        GameObject nextPiece = unloadedObjects[random].gameObject;
+        Vector3 nextPosition = lastObjectLoadedAt;
+        nextPosition.x += offsetX;
+        nextPiece.transform.position = nextPosition;
+        nextPiece.SetActive(true);
+        unloadedObjects.Remove(nextPiece);
+        loadedObjects.Add(nextPiece);
+
+        lastObjectLoadedAt = nextPosition;
+    }
+
+    void RemovePiece()
+    {
+        GameObject objectToRemove = loadedObjects[0].gameObject;
+        objectToRemove.SetActive(false);
+        loadedObjects.Remove(objectToRemove);
+        unloadedObjects.Add(objectToRemove);
+        
+    }
 
     // Update is called once per frame
     void Update() 
     {
-	
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            AddPiece();
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            RemovePiece();
+        }
 	}
 }
