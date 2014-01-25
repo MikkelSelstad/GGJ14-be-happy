@@ -19,7 +19,6 @@ public class Level : MonoBehaviour {
     private Vector3 lastObjectLoadedAt = Vector3.zero;
 
 
-    
 
     void Awake()
     {
@@ -32,6 +31,7 @@ public class Level : MonoBehaviour {
                 unloadedObjects.Add(prefab);
                 prefab.SetActive(false);
             }
+
         }
 
         //Do some shufflin' to add extra randomization.

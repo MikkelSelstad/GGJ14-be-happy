@@ -1,0 +1,13 @@
+kitten
+puppy
+dog
+giraffe
+rhino
+bird
+parrot
+dinosaur
+velociraptor
+monkey
+cow
+lion
+doge
