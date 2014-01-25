@@ -7,7 +7,8 @@ public class Happiness : MonoBehaviour {
 	public int minhappy = 0; 
 	public int happylvl = 10;
 	float tick = 1;
-//	int i = 4;
+	int x;
+
 
 	// Use this for initialization
 	void Start () 
@@ -17,7 +18,8 @@ public class Happiness : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 
 		print (tick);
 
@@ -53,7 +55,6 @@ public class Happiness : MonoBehaviour {
 				happylvl = happylvl +20;			
 			}
 		}
-
 
 
 	}
