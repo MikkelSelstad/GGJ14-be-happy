@@ -13,3 +13,23 @@ Lion
 Doge
 Cod
 Salmon
+Ape
+Chicken
+Crab
+Elephant
+Ferret
+Fox
+Gazelle
+Giant Panda
+Goose
+Horse
+Lobster
+Ostrich
+Owl
+Racoon
+Sheep
+Wombat
+Wolf
+Walrus
+Turtle
+Squirrel

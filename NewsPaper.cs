@@ -10,6 +10,14 @@ public class NewsPaper : MonoBehaviour {
     public UILabel mainHeadline;
     public UILabel mainStory;
 
+    public UILabel subHeadline01;
+    public UILabel subStory01;
+
+    public UILabel subHeadline02;
+    public UILabel subStory02;
+
+
+
     public TextAsset TxtTitles;
     public TextAsset TxtBadObjects;
     public TextAsset TxtGoodObjects;
@@ -211,16 +219,41 @@ public class NewsPaper : MonoBehaviour {
         for (int i = 0; i < badStoriesToGenerate; i++)
         {
             GenerateStory(true);
+            GenerateStory(false);
         }
+
+        GetStoryForUI(mainHeadline, mainStory, false);
+        GetStoryForUI(subHeadline01, subStory01, true);
+        GetStoryForUI(subHeadline02, subStory02, false);
+
+	}
+
+    private void GetStoryForUI(UILabel Head, UILabel Body, bool bad)
+    {
         
 
-        int ra = Random.Range(0, badStories.Count);
+        if (bad)
+        {
+            int ra = Random.Range(0, badStories.Count);
 
-        string ha = GetHeadLine(badStories[ra]).ToUpper();
-        string bo = GetStoryBody(badStories[ra]);
-        mainHeadline.text = ha;
-        mainStory.text = bo;
-	}
+            string ha = GetHeadLine(badStories[ra]).ToUpper();
+            string bo = GetStoryBody(badStories[ra]);
+            Head.text = ha;
+            Body.text = bo;
+        }
+
+        else if (!bad)
+        {
+            int ra = Random.Range(0, goodStories.Count);
+
+            string ha = GetHeadLine(goodStories[ra]).ToUpper();
+            string bo = GetStoryBody(goodStories[ra]);
+            Head.text = ha;
+            Body.text = bo;
+        }
+
+        
+    }
 
     // Update is called once per frame
     void Update() 

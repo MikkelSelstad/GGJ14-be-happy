@@ -2,7 +2,8 @@ candy
 teddy bear
 hamburger
 rocket
-phone
+friend
+sun
 cake
 cupcake
 chocolate
