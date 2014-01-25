@@ -2,29 +2,27 @@
 using System.Collections;
 
 
-public class happyning : MonoBehaviour 
+public class Happyning : MonoBehaviour 
 {
 
 	// Use this for initialization
-	bool randomhappy = false;
-	int happyval = 1;
-	int x = 5;
-
+	public bool randomhappy = false;
+	public int happyval = 1;
+	public int randval = 2;
+	
 	void Start () 
 	{
-	
+
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-
+		if(Input.GetKeyDown(KeyCode.R))
+		{
+			randval = randval +Random.Range(0, 10);
+			print(randval);
+		}
 	}
-
-	
-	/*
-
-
-*/
 
 }

@@ -3,11 +3,14 @@ using System.Collections;
 
 public class Happiness : MonoBehaviour {
 
-	public int maxhappy = 100; 
-	public int minhappy = 0; 
+
+	public	Happyning happyning;
+
+	public static int maxhappy = 100; 
+	public static int minhappy = 0; 
 	public int happylvl = 10;
 	float tick = 1;
-	int x;
+	//int x;
 
 
 	// Use this for initialization
@@ -21,7 +24,7 @@ public class Happiness : MonoBehaviour {
 	void Update () 
 	{
 
-		print (tick);
+	//	print (tick);
 
 		tick -= Time.deltaTime;
 		if(tick <= 0)
@@ -50,13 +53,50 @@ public class Happiness : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Space))
 		{
-			if (happylvl <= maxhappy--)
+			if (happylvl <= maxhappy)
 			{
 				happylvl = happylvl +20;			
 			}
 		}
 
 
+		
 	}
-	
+
+
+
+	void OnTriggerEnter(Collider other)
+	{
+		if(Happyning)
+		{
+			happyning = other.GetComponent<Happyning>();
+
+
+			if (other.GetComponent(Happyning.randomhappy) == true) 
+			{
+
+
+				if (Happyning.randval > 5) 
+				{
+					happylvl = other.GetComponent(Happyning.happyval) - happylvl;
+			
+				} 
+				else  
+				{
+					happylvl = other.GetComponent(Happyning.happyval) + happylvl;
+				}
+
+			}
+			else 
+			{
+				happylvl = other.GetComponent(Happyning.happyval) + happylvl;
+			}
+
+		}
+		else
+		{
+
+		}
+	}
+
 }
