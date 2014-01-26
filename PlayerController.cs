@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour {
 	Animator animator;
 	Vector3 currentDir = Vector3.zero;
 	float magnitude;
-	float tid = 0;
+	private float tid = 0;
+    public float tiden = 0f;
 
 	
 	void Start()
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour {
 		if (jumpButton && tid <= 0)
 		{
 			rigidbody.AddForce(new Vector3(0f, jumpSpeed, 0f));
-			tid = 1.2f;
+			tid = tiden;
 		}
 			currentDir = transform.rotation.eulerAngles;
 	}
