@@ -14,7 +14,10 @@ public class DepressionManager : MonoBehaviour {
     {
         if(OnDepressionChange != null)
         OnDepressionChange(happyLevel);
+
     }
+
+
 
     public static void GetPaper(bool get)
     {
@@ -26,7 +29,7 @@ public class DepressionManager : MonoBehaviour {
 
     void OnEnable()
     {
-
+        
     }
 
     void OnDisable()
