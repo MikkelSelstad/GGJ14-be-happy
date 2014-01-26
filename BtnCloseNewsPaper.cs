@@ -3,10 +3,12 @@ using System.Collections;
 
 public class BtnCloseNewsPaper : MonoBehaviour {
 
+    public GameObject NewsPaper;
+
     void OnClick()
     {
         DepressionManager.ResetPaper();
-        this.gameObject.SetActive(false);
+        NewsPaper.SetActive(false);
     }
 
 }

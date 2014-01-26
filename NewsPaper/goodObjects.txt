@@ -8,14 +8,12 @@ cake
 cupcake
 chocolate
 diamond
-<<<<<<< HEAD
 coffee
 gift
 Star Wars movie
 bacon
 laser
-=======
 money
 movie
 game
->>>>>>> 080b021b5eee04d590f583f407bb38578fa25789
+
