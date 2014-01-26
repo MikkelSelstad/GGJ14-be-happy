@@ -20,19 +20,17 @@ public class NewsPaper : MonoBehaviour {
     public TextAsset TxtBadObjects;
     public TextAsset TxtGoodObjects;
     public TextAsset TxtPeople;
-    public TextAsset TxtIngress;
     public TextAsset TxtAnimals;
 
 
-    public List<string> Titles = new List<string>();
-    public List<string> BadObjects = new List<string>();
-    public List<string> GoodObjects = new List<string>();
-    public List<string> People = new List<string>();
-    public List<string> Ingress = new List<string>();
-    public List<string> Animals = new List<string>();
+    private List<string> Titles = new List<string>();
+    private List<string> BadObjects = new List<string>();
+    private List<string> GoodObjects = new List<string>();
+    private List<string> People = new List<string>();
+    private List<string> Animals = new List<string>();
 
-    public List<string> goodStories = new List<string>();
-    public List<string> badStories = new List<string>();
+    private List<string> goodStories = new List<string>();
+    private List<string> badStories = new List<string>();
 
 
     void ParseTextSimple(TextAsset text, List<string> list)

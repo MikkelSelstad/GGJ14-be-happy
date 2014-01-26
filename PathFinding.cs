@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class PathFinding : MonoBehaviour {
-	public Transform target;
+	
+    public Transform target;
 	public Transform rayOneTarget;
 	public Transform rayTwoTarget;
 	public int followSpeed = 4;
@@ -13,12 +14,14 @@ public class PathFinding : MonoBehaviour {
 	private Ray rayOne;
 	private Ray rayTwo;
 	private bool objectInTheWay = false;
-//	private bool rayOneAvoid;
-//	private bool rayTwoAvoid;
+
+    void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
 	void FixedUpdate()
 	{
-
 		FindObjectInFront();
 	}
 

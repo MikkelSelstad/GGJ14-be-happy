@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Level : MonoBehaviour {
 
+    public GameObject enemyPrefab;
     public List<GameObject> prefabs = new List<GameObject>();               //  The different level pieces
 
     // Lists for Recycling objects
@@ -100,6 +101,29 @@ public class Level : MonoBehaviour {
 
         lastObjectLoadedAt = nextPosition;
         lastPrefabLoaded = nextPiece;
+
+        //Add some frienemies
+        SpawnEnemy(GetSpawnPoint(nextPiece));
+    }
+
+        Transform GetSpawnPoint(GameObject parentObject)
+        {
+            Transform spawn = parentObject.transform.FindChild("Spawner");
+            if (spawn != null)
+            {
+                return spawn;
+            }
+            return null;
+        }
+
+    void SpawnEnemy(Transform spawnpoint)
+    {
+        int dice = Random.Range(0, 10);
+
+        if (dice > 5)
+        {
+            GameObject enemy = Instantiate(enemyPrefab, spawnpoint.position, Quaternion.identity) as GameObject;
+        }
     }
 
     public void RemovePiece()
