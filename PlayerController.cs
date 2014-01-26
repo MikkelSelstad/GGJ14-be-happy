@@ -12,13 +12,31 @@ public class PlayerController : MonoBehaviour {
 	Vector3 currentDir = Vector3.zero;
 	float magnitude;
 	private float tid = 0;
+    private float fullSpeed;
     public float tiden = 0f;
 
 	
 	void Start()
 	{
 		animator = GetComponent<Animator>();
+        fullSpeed = speed;
 	}
+
+    void OnEnable()
+    {
+        DepressionManager.OnDepressionChange += OnDepressionChange;
+    }
+
+    void OnDisable()
+    {
+        DepressionManager.OnDepressionChange -= OnDepressionChange;
+    }
+
+    private void OnDepressionChange(int happyLevel)
+    {
+        speed = (fullSpeed / happyLevel) * 1.80f;
+        speed = Mathf.Clamp(speed, 1, fullSpeed);
+    }
 	
 	void Update()
 	{
@@ -28,7 +46,7 @@ public class PlayerController : MonoBehaviour {
 				} else if (magnitude != 0.0f) {
 						transform.forward = Vector3.Normalize (new Vector3 (Input.GetAxis ("Horizontal"), 0f, Input.GetAxis ("Vertical")));
 				}
-		Debug.Log(Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"))));
+
 		
 		vertical = Input.GetAxis("Vertical");
 		horizontal = Input.GetAxis("Horizontal");

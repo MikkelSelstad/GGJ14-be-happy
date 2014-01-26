@@ -10,36 +10,22 @@ public class Happiness : MonoBehaviour {
 	public static int minhappy = 0; 
 	public int happylvl = 10;
 	float tick = 1;
-	//int x;
 
-
-	// Use this for initialization
-	void Start () 
-	{
-
-
-	}
 	
-	// Update is called once per frame
+
 	void Update () 
 	{
-
-	//	print (tick);
-
 		tick -= Time.deltaTime;
 		if(tick <= 0)
 		{
 			tick = 1;
-			if(happylvl > minhappy)
-				happylvl --;
+            if (happylvl > minhappy)
+            {
+                happylvl--;
+                DepressionManager.Depress(happylvl);
+            }
 		}	
 
-
-		if (happylvl == minhappy) 
-		{
-			Time.timeScale = 0.2f;
-			print("time slow");
-		}
 
 		if (happylvl >= maxhappy)
 		{

@@ -4,6 +4,7 @@ using System.Collections;
 public class DepressionSwitcher : MonoBehaviour {
 
     public int LevelActive = 50;
+    public bool happy = false;
 
     void OnEnable()
     {
@@ -17,13 +18,19 @@ public class DepressionSwitcher : MonoBehaviour {
 
     void HideObject()
     {
+        if(collider != null)
         this.collider.enabled = false;
-        this.renderer.enabled = false;
+
+        if(renderer != null)
+         this.renderer.enabled = false;
     }
 
     void ShowObject()
     {
+        if(collider != null)
         this.collider.enabled = true;
+
+        if(renderer != null)
         this.renderer.enabled = true;
     }
 
@@ -31,12 +38,28 @@ public class DepressionSwitcher : MonoBehaviour {
     {
         if (happyLevel < LevelActive)
         {
-            HideObject();
+            if (happy)
+            {
+                HideObject();
+            }
+
+            if (!happy)
+            {
+                ShowObject();
+            }
         }
 
         else if (happyLevel > LevelActive)
         {
-            ShowObject();
+            if (happy)
+            {
+                ShowObject();
+            }
+
+            if (!happy)
+            {
+                HideObject();
+            }
         }
     }
 }

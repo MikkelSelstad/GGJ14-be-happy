@@ -17,6 +17,7 @@ public class Level : MonoBehaviour {
 
     //Store the position of the last object loaded for reference.
     private Vector3 lastObjectLoadedAt = Vector3.zero;
+    private GameObject lastPrefabLoaded;
 
 
 
@@ -67,12 +68,22 @@ public class Level : MonoBehaviour {
                 lastObjectLoadedAt = obj.transform.position;
             }
         }
+
+        DepressionManager.Depress(60);
 	}
 
     void AddPiece()
     {
         int random = Random.Range(0, unloadedObjects.Count);
         GameObject nextPiece = unloadedObjects[random].gameObject;
+        
+        if (nextPiece == lastPrefabLoaded)
+        {
+            Debug.LogError("Skipping duplicate");
+            random = Random.Range(0, unloadedObjects.Count);
+            nextPiece = unloadedObjects[random].gameObject;
+        }
+
         Vector3 nextPosition = lastObjectLoadedAt;
         nextPosition.x += offsetX;
         nextPiece.transform.position = nextPosition;
@@ -81,6 +92,7 @@ public class Level : MonoBehaviour {
         loadedObjects.Add(nextPiece);
 
         lastObjectLoadedAt = nextPosition;
+        lastPrefabLoaded = nextPiece;
     }
 
     void RemovePiece()
@@ -95,6 +107,10 @@ public class Level : MonoBehaviour {
     // Update is called once per frame
     void Update() 
     {
-    
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            
+            DepressionManager.Depress(10);
+        }
 	}
 }
