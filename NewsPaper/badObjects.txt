@@ -10,3 +10,5 @@ scum
 jerk
 merge error
 bomb
+hunger
+fire

@@ -16,4 +16,6 @@ laser
 money
 movie
 game
+soda
+ice cream
 
