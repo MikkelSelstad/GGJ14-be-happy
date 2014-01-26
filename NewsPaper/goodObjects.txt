@@ -8,3 +8,6 @@ cake
 cupcake
 chocolate
 diamond
+money
+movie
+game
