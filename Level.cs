@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Level : MonoBehaviour {
 
     public GameObject enemyPrefab;
+    public GameObject cake;
     public List<GameObject> prefabs = new List<GameObject>();               //  The different level pieces
 
     // Lists for Recycling objects
@@ -104,6 +105,9 @@ public class Level : MonoBehaviour {
 
         //Add some frienemies
         SpawnEnemy(GetSpawnPoint(nextPiece));
+
+        //Add some cakes
+        SpawnCake(GetCakePoint(nextPiece));
     }
 
         Transform GetSpawnPoint(GameObject parentObject)
@@ -114,6 +118,27 @@ public class Level : MonoBehaviour {
                 return spawn;
             }
             return null;
+        }
+
+        Transform GetCakePoint(GameObject parentObject)
+        {
+            Transform cakePoint = parentObject.transform.FindChild("Caker");
+            
+            if (cakePoint != null)
+            {
+                return cakePoint;
+            }
+            return null;
+        }
+
+        void SpawnCake(Transform cakePoint)
+        {
+            int dice = Random.Range(0, 5);
+
+            if (dice < 3)
+            {
+                GameObject kaka = Instantiate(cake, cakePoint.position, Quaternion.identity) as GameObject;
+            }
         }
 
     void SpawnEnemy(Transform spawnpoint)
