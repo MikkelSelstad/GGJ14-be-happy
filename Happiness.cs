@@ -63,22 +63,22 @@ public class Happiness : MonoBehaviour {
 		
 	}
 
-
+    /*
 
 	void OnTriggerEnter(Collider other)
 	{
-		if(Happyning)
+		if(happyning)
 		{
 			happyning = other.GetComponent<Happyning>();
 
 
-			if (other.GetComponent(Happyning.randomhappy) == true) 
+            if (other.GetComponent<happyning.randomhappy> == true) 
 			{
 
 
-				if (Happyning.randval > 5) 
+				if (happyning.randval > 5) 
 				{
-					happylvl = other.GetComponent(Happyning.happyval) - happylvl;
+					happylvl = other.GetComponent<Happyning.happyval> - happylvl;
 			
 				} 
 				else  
@@ -98,5 +98,6 @@ public class Happiness : MonoBehaviour {
 
 		}
 	}
+     */
 
 }
