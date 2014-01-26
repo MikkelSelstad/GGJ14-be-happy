@@ -8,3 +8,8 @@ cake
 cupcake
 chocolate
 diamond
+coffee
+gift
+Star Wars movie
+bacon
+laser
