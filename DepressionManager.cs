@@ -10,6 +10,8 @@ public class DepressionManager : MonoBehaviour {
     public delegate void GetNewsPaper(bool get);
     public static event GetNewsPaper OnNewsPaperGet;
 
+    public delegate void RegenPaper();
+    public static event RegenPaper OnRegenPaper;
 
     public static void Depress(int happyLevel)
     {
@@ -27,6 +29,13 @@ public class DepressionManager : MonoBehaviour {
         }
     }
 
+    public static void ResetPaper()
+    {
+        if(OnRegenPaper != null)
+        {
+            OnRegenPaper();
+        }
+    }
     void OnEnable()
     {
         

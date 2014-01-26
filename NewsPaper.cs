@@ -226,6 +226,15 @@ public class NewsPaper : MonoBehaviour {
 
 	}
 
+  
+
+     public void RegeneratePaper()
+    {
+        GetStoryForUI(mainHeadline, mainStory, false);
+        GetStoryForUI(subHeadline01, subStory01, true);
+        GetStoryForUI(subHeadline02, subStory02, false);
+    }
+
     private void GetStoryForUI(UILabel Head, UILabel Body, bool bad)
     {
         
@@ -251,6 +260,16 @@ public class NewsPaper : MonoBehaviour {
         }
 
         
+    }
+
+    void OnEnable()
+    {
+        DepressionManager.OnRegenPaper += RegeneratePaper;
+    }
+
+    void OnDisable()
+    {
+        DepressionManager.OnRegenPaper -= RegeneratePaper;
     }
 
     // Update is called once per frame
