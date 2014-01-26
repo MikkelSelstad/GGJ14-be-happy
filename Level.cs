@@ -78,13 +78,17 @@ public class Level : MonoBehaviour {
     public void AddPiece()
     {
         int random = Random.Range(0, unloadedObjects.Count);
-        GameObject nextPiece = unloadedObjects[random].gameObject;
-        
-        if (nextPiece == lastPrefabLoaded)
+        GameObject nextPiece;
+        nextPiece = unloadedObjects[random].gameObject;
+
+        if (lastPrefabLoaded != null)
         {
-            Debug.LogError("Skipping duplicate");
-            random = Random.Range(0, unloadedObjects.Count);
-            nextPiece = unloadedObjects[random].gameObject;
+            if (nextPiece.gameObject.tag == lastPrefabLoaded.gameObject.tag)
+            {
+                Debug.LogError("Skipping duplicate");
+                random = Random.Range(0, unloadedObjects.Count);
+                nextPiece = unloadedObjects[random].gameObject;
+            }
         }
 
         Vector3 nextPosition = lastObjectLoadedAt;
