@@ -33,3 +33,5 @@ Wolf
 Walrus
 Turtle
 Squirrel
+Narwhal
+Bear
