@@ -16,8 +16,6 @@ public class NewsPaper : MonoBehaviour {
     public UILabel subHeadline02;
     public UILabel subStory02;
 
-
-
     public TextAsset TxtTitles;
     public TextAsset TxtBadObjects;
     public TextAsset TxtGoodObjects;

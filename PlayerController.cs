@@ -15,6 +15,11 @@ public class PlayerController : MonoBehaviour {
     private float fullSpeed;
     public float tiden = 0f;
 
+    public Level level;
+
+    public GameObject newsBulletin;
+
+
 	
 	void Start()
 	{
@@ -25,16 +30,23 @@ public class PlayerController : MonoBehaviour {
     void OnEnable()
     {
         DepressionManager.OnDepressionChange += OnDepressionChange;
+        DepressionManager.OnNewsPaperGet += OnNewsPaperGet;
     }
 
     void OnDisable()
     {
         DepressionManager.OnDepressionChange -= OnDepressionChange;
+        DepressionManager.OnNewsPaperGet -= OnNewsPaperGet;
+    }
+
+    private void OnNewsPaperGet(bool get)
+    {
+        newsBulletin.SetActive(true);
     }
 
     private void OnDepressionChange(int happyLevel)
     {
-        speed = (fullSpeed / happyLevel) * 1.80f;
+        speed = fullSpeed * (happyLevel * 0.10f);
         speed = Mathf.Clamp(speed, 1, fullSpeed);
     }
 	
@@ -64,8 +76,22 @@ public class PlayerController : MonoBehaviour {
 			tid = tiden;
 		}
 			currentDir = transform.rotation.eulerAngles;
+
+            if (transform.position.x >= level.LastObjectLoadedAt.x - 16)
+            {
+                level.AddPiece();
+                level.RemovePiece();
+            }
 	}
-	
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "NewsPaper")
+        {
+            DepressionManager.GetPaper(true);
+        }
+    }
+
 	void FixedUpdate()
 	{
 		

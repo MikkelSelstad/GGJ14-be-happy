@@ -19,7 +19,10 @@ public class Level : MonoBehaviour {
     private Vector3 lastObjectLoadedAt = Vector3.zero;
     private GameObject lastPrefabLoaded;
 
-
+    public Vector3 LastObjectLoadedAt
+    {
+        get { return lastObjectLoadedAt; }
+    }
 
     void Awake()
     {
@@ -72,7 +75,7 @@ public class Level : MonoBehaviour {
         DepressionManager.Depress(60);
 	}
 
-    void AddPiece()
+    public void AddPiece()
     {
         int random = Random.Range(0, unloadedObjects.Count);
         GameObject nextPiece = unloadedObjects[random].gameObject;
@@ -95,7 +98,7 @@ public class Level : MonoBehaviour {
         lastPrefabLoaded = nextPiece;
     }
 
-    void RemovePiece()
+    public void RemovePiece()
     {
         GameObject objectToRemove = loadedObjects[0].gameObject;
         objectToRemove.SetActive(false);
