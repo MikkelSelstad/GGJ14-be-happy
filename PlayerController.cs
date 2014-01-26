@@ -12,13 +12,43 @@ public class PlayerController : MonoBehaviour {
 	Vector3 currentDir = Vector3.zero;
 	float magnitude;
 	private float tid = 0;
+    private float fullSpeed;
     public float tiden = 0f;
+
+    public Level level;
+
+    public GameObject newsBulletin;
+
 
 	
 	void Start()
 	{
 		animator = GetComponent<Animator>();
+        fullSpeed = speed;
 	}
+
+    void OnEnable()
+    {
+        DepressionManager.OnDepressionChange += OnDepressionChange;
+        DepressionManager.OnNewsPaperGet += OnNewsPaperGet;
+    }
+
+    void OnDisable()
+    {
+        DepressionManager.OnDepressionChange -= OnDepressionChange;
+        DepressionManager.OnNewsPaperGet -= OnNewsPaperGet;
+    }
+
+    private void OnNewsPaperGet(bool get)
+    {
+        newsBulletin.SetActive(true);
+    }
+
+    private void OnDepressionChange(int happyLevel)
+    {
+        speed = fullSpeed * (happyLevel * 0.10f);
+        speed = Mathf.Clamp(speed, 1, fullSpeed);
+    }
 	
 	void Update()
 	{
@@ -28,7 +58,7 @@ public class PlayerController : MonoBehaviour {
 				} else if (magnitude != 0.0f) {
 						transform.forward = Vector3.Normalize (new Vector3 (Input.GetAxis ("Horizontal"), 0f, Input.GetAxis ("Vertical")));
 				}
-		Debug.Log(Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"))));
+
 		
 		vertical = Input.GetAxis("Vertical");
 		horizontal = Input.GetAxis("Horizontal");
@@ -46,8 +76,22 @@ public class PlayerController : MonoBehaviour {
 			tid = tiden;
 		}
 			currentDir = transform.rotation.eulerAngles;
+
+            if (transform.position.x >= level.LastObjectLoadedAt.x - 16)
+            {
+                level.AddPiece();
+                level.RemovePiece();
+            }
 	}
-	
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "NewsPaper")
+        {
+            DepressionManager.GetPaper(true);
+        }
+    }
+
 	void FixedUpdate()
 	{
 		

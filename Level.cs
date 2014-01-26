@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Level : MonoBehaviour {
 
+    public GameObject enemyPrefab;
     public List<GameObject> prefabs = new List<GameObject>();               //  The different level pieces
 
     // Lists for Recycling objects
@@ -17,8 +18,12 @@ public class Level : MonoBehaviour {
 
     //Store the position of the last object loaded for reference.
     private Vector3 lastObjectLoadedAt = Vector3.zero;
+    private GameObject lastPrefabLoaded;
 
-
+    public Vector3 LastObjectLoadedAt
+    {
+        get { return lastObjectLoadedAt; }
+    }
 
     void Awake()
     {
@@ -67,12 +72,26 @@ public class Level : MonoBehaviour {
                 lastObjectLoadedAt = obj.transform.position;
             }
         }
+
+        DepressionManager.Depress(60);
 	}
 
-    void AddPiece()
+    public void AddPiece()
     {
         int random = Random.Range(0, unloadedObjects.Count);
-        GameObject nextPiece = unloadedObjects[random].gameObject;
+        GameObject nextPiece;
+        nextPiece = unloadedObjects[random].gameObject;
+
+        if (lastPrefabLoaded != null)
+        {
+            if (nextPiece.gameObject.tag == lastPrefabLoaded.gameObject.tag)
+            {
+                Debug.LogError("Skipping duplicate");
+                random = Random.Range(0, unloadedObjects.Count);
+                nextPiece = unloadedObjects[random].gameObject;
+            }
+        }
+
         Vector3 nextPosition = lastObjectLoadedAt;
         nextPosition.x += offsetX;
         nextPiece.transform.position = nextPosition;
@@ -81,9 +100,33 @@ public class Level : MonoBehaviour {
         loadedObjects.Add(nextPiece);
 
         lastObjectLoadedAt = nextPosition;
+        lastPrefabLoaded = nextPiece;
+
+        //Add some frienemies
+        SpawnEnemy(GetSpawnPoint(nextPiece));
     }
 
-    void RemovePiece()
+        Transform GetSpawnPoint(GameObject parentObject)
+        {
+            Transform spawn = parentObject.transform.FindChild("Spawner");
+            if (spawn != null)
+            {
+                return spawn;
+            }
+            return null;
+        }
+
+    void SpawnEnemy(Transform spawnpoint)
+    {
+        int dice = Random.Range(0, 10);
+
+        if (dice > 5)
+        {
+            GameObject enemy = Instantiate(enemyPrefab, spawnpoint.position, Quaternion.identity) as GameObject;
+        }
+    }
+
+    public void RemovePiece()
     {
         GameObject objectToRemove = loadedObjects[0].gameObject;
         objectToRemove.SetActive(false);
@@ -95,6 +138,10 @@ public class Level : MonoBehaviour {
     // Update is called once per frame
     void Update() 
     {
-    
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            
+            DepressionManager.Depress(10);
+        }
 	}
 }

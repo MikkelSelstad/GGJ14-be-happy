@@ -6,7 +6,7 @@ var dampTime : float = 0.3; //offset from the viewport center to fix damping
 private var velocity = Vector3.zero;
 var target : Transform;
 
-function Update() {
+function FixedUpdate() {
     if(target) {
         var point : Vector3 = camera.WorldToViewportPoint(target.position);
         var delta : Vector3 = target.position - camera.ViewportToWorldPoint(Vector3(0.45, 0.25, point.z));

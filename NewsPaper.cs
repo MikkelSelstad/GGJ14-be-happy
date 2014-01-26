@@ -16,25 +16,21 @@ public class NewsPaper : MonoBehaviour {
     public UILabel subHeadline02;
     public UILabel subStory02;
 
-
-
     public TextAsset TxtTitles;
     public TextAsset TxtBadObjects;
     public TextAsset TxtGoodObjects;
     public TextAsset TxtPeople;
-    public TextAsset TxtIngress;
     public TextAsset TxtAnimals;
 
 
-    public List<string> Titles = new List<string>();
-    public List<string> BadObjects = new List<string>();
-    public List<string> GoodObjects = new List<string>();
-    public List<string> People = new List<string>();
-    public List<string> Ingress = new List<string>();
-    public List<string> Animals = new List<string>();
+    private List<string> Titles = new List<string>();
+    private List<string> BadObjects = new List<string>();
+    private List<string> GoodObjects = new List<string>();
+    private List<string> People = new List<string>();
+    private List<string> Animals = new List<string>();
 
-    public List<string> goodStories = new List<string>();
-    public List<string> badStories = new List<string>();
+    private List<string> goodStories = new List<string>();
+    private List<string> badStories = new List<string>();
 
 
     void ParseTextSimple(TextAsset text, List<string> list)
@@ -228,6 +224,15 @@ public class NewsPaper : MonoBehaviour {
 
 	}
 
+  
+
+     public void RegeneratePaper()
+    {
+        GetStoryForUI(mainHeadline, mainStory, false);
+        GetStoryForUI(subHeadline01, subStory01, true);
+        GetStoryForUI(subHeadline02, subStory02, false);
+    }
+
     private void GetStoryForUI(UILabel Head, UILabel Body, bool bad)
     {
         
@@ -253,6 +258,16 @@ public class NewsPaper : MonoBehaviour {
         }
 
         
+    }
+
+    void OnEnable()
+    {
+        DepressionManager.OnRegenPaper += RegeneratePaper;
+    }
+
+    void OnDisable()
+    {
+        DepressionManager.OnRegenPaper -= RegeneratePaper;
     }
 
     // Update is called once per frame
